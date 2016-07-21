@@ -8,7 +8,7 @@
 <center>
     <h2 class="c1">Phone Book Application</h3>
 	<div class="c2">
-	<a href="http://localhost/addcontact.php">Add Contact</a> | <a href="http://localhost/deletecontact.php">Delete Contact</a>| <a href="http://localhost/updatecontact.php">Update Contact</a>
+	<a href="http://localhost/Phonebook1/addcontact.php">Add Contact</a> | <a href="http://localhost/Phonebook1/deletecontact.php">Delete Contact</a> | <a href="http://localhost/Phonebook1/updatecontact.php">Update Contact</a>
 	</div>
 </center>
 <hr>
@@ -18,6 +18,9 @@
 //Form to get the user input of First, Middle, Last Names, Phone Number and Email
 echo '<table align="centre" cellspacing="5" cellpadding="10" width="100%">';
 echo "<form action='addcontact_action.php' method='POST'>";
+
+echo "<tr><td><b>First Name</b></td>";
+echo "<td><input type='text' name='v_firstName' value='' maxlength=50></td></tr>";
 
 echo "<tr><td><b>First Name</b></td>";
 echo "<td><input type='text' name='v_firstName' value='' maxlength=50></td></tr>";
@@ -49,8 +52,8 @@ echo "</table>";
 <hr>
 <!--Footer-->
 <center>
-<h3><a href="http://localhost/logout.php">Logout</a></p>
-<h3><a href="http://localhost/phonebook_index.php">Go Back to Home</a></p>
+<h3><a href="http://localhost/Phonebook1/logout.php">Logout</a></p>
+<h3><a href="http://localhost/Phonebook1/phonebook_index.php">Show My Contacts</a></p>
 <p>Copyright 2016 Manjil Thapa Magar </p>
 </h3>
 </center>

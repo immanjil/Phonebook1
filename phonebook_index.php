@@ -1,6 +1,6 @@
 <html>
 <head>
-<title> Phone Book Index </title>
+<title> Activities Page </title>
 </head>
 <body>
 
@@ -32,28 +32,31 @@ or die("Could not connect to MySQL");
 $id = $_SESSION["user_id"] ;
 $table = 'contacts';
 
+//Get User's Info from the Database
+$query = "SELECT v_firstName FROM user_credentials where user_id='$id'";
+$response = @mysqli_query($db, $query);
+$row = mysqli_fetch_array($response);
+$user=$row['v_firstName'];
+echo "<center><h2>Welcome to your Contact List $user</h2></center>";
 if ($table)
 {
 //List the Contacts available on the Database
-$query = "SELECT contact_id, v_firstName, v_middleName, v_lastName, v_phoneNumber, v_email, v_address, v_city, v_state, v_zipcode FROM $table where user_id='$id'";
+$query = "SELECT user_id, contact_id, v_firstName, v_phoneNumber, time_stamp FROM $table where user_id='$id'";
 $response = @mysqli_query($db, $query);
 
 //count the color$number
 $number = 1;
 
+echo "<form action='interaction.php' method='post'>";
+
 if ($response)
 {
 echo '<table align="centre" cellspacing="2" cellpadding="5" width="100%">';
-echo '<tr> <td align="left"><b>Contact ID</b></td>';
+echo '<td align="left"><b>Contact ID</b></td>';
 echo '<td align="left"><b>First Name</b></td>';
-echo '<td align="left"><b>Middle Name</b></td>';
-echo '<td align="left"><b>Last Name</b></td>';
 echo '<td align="left"><b>Phone Number</b></td>';
-echo '<td align="left"><b>Email</b></td>';
-echo '<td align="left"><b>Address</b></td>';
-echo '<td align="left"><b>City</b></td>';
-echo '<td align="left"><b>State</b></td>';
-echo '<td align="left"><b>Zip Code</b></td></tr>';
+echo '<td align="left"><b>Time Stamp</b></td>';
+
 
 while($row = mysqli_fetch_array($response))
 {
@@ -62,35 +65,23 @@ while($row = mysqli_fetch_array($response))
 		echo '<tr bgcolor=#8AD3FC><td align="left">'.
 		$row['contact_id'].'</td><td align="left">'.
 		$row['v_firstName'].'</td><td align="left">'.
-		$row['v_middleName'].'</td><td align="left">'.
-		$row['v_lastName'].'</td><td align="left">'.
 		$row['v_phoneNumber'].'</td><td align="left">'.
-		$row['v_email'].'</td><td align="left">'.
-		$row['v_address'].'</td><td align="left">'.
-		$row['v_city'].'</td><td align="left">'.
-		$row['v_state'].'</td><td align="left">'.
-		$row['v_zipcode'].'</td><td align="left">';
+		$row['time_stamp'].'</td>';
 		echo '</tr>';
 	}
 		else {
 		echo '<tr bgcolor=#FFFFFF><td align="left">'.
 		$row['contact_id'].'</td><td align="left">'.
 		$row['v_firstName'].'</td><td align="left">'.
-		$row['v_middleName'].'</td><td align="left">'.
-		$row['v_lastName'].'</td><td align="left">'.
 		$row['v_phoneNumber'].'</td><td align="left">'.
-		$row['v_email'].'</td><td align="left">'.
-		$row['v_address'].'</td><td align="left">'.
-		$row['v_city'].'</td><td align="left">'.
-		$row['v_state'].'</td><td align="left">'.
-		$row['v_zipcode'].'</td><td align="left">';
+		$row['time_stamp'].'</td>';
 		echo '</tr>';
 	}
 		
 	$number++;
 }
 echo '</table>';
-
+echo "<center><h2><a href='http://localhost/Phonebook1/interaction.php'>Go to Full contact Detail</a></h2></center>";
 }
 else{
 	echo"No DATABASE";
@@ -108,13 +99,14 @@ mysqli_close($db);
 
 ?>
 
+
 <hr>
 <!--Footer-->
 <center>
-<h3><a href="http://localhost/Phonebook1/phonebook_index.php">Previous Page</a>
-<h5><a href="http://localhost/Phonebook1/logout.php">Logout</a>
-<h5><a href="http://localhost/Phonebook1/index.php">Take me to Login</a>
+<h3><a href="http://localhost/Phonebook1/logout.php">Logout</a></p>
+<h3><a href="http://localhost/Phonebook1/phoneBookApp_home.php">Take me to Login</a></p>
 <p>Copyright 2016 Manjil Thapa Magar </p>
+</h3>
 </center>
 
 </body>

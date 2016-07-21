@@ -7,6 +7,8 @@
 <!--Heading of application and links to other pages-->
 <center>
     <h2 class="c1">Phone Book Application</h3>
+	<a href="http://localhost/Phonebook1/addcontact.php">Add Contact</a> | <a href="http://localhost/Phonebook1/deletecontact.php">Delete Contact</a> | <a href="http://localhost/Phonebook1/updatecontact.php">Update Contact</a>
+	</div>
 	</center>
 <hr>
 
@@ -54,7 +56,7 @@ echo "</table>";
 <hr>
 <!--Footer-->
 <center>
-<p><h3><a href="http://localhost/phoneBookApp_home.php">Login</a></p>
+<p><h3><a href="http://localhost/Phonebook1/phoneBookApp_home.php">Login</a></p>
 <p>Copyright 2016 Manjil Thapa Magar </p>
 </h3>
 </center>

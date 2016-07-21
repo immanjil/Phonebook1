@@ -83,7 +83,7 @@ echo "Registration successful";
 <hr>
 <!--Footer-->
 <center>
-<p><h3><a href="http://localhost/phoneBookApp_home.php">Login</a></p>
+<p><h3><a href="http://localhost/Phonebook1/phoneBookApp_home.php">Login</a></p>
 <p>Copyright 2016 Manjil Thapa Magar </p>
 </h3>
 </center>

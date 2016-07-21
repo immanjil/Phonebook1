@@ -1,6 +1,6 @@
 <html>
 <head>
-<title> Home </title>
+<title> Index </title>
 </head>
 <body>
 
@@ -30,8 +30,8 @@ echo "</table>";
 
 ?>
 <left>
-<p><h4><a href="http://localhost/registration.php">Sign Up</a></p>
-<p><h4><a href="http://localhost/reset_password.php">Reset Password</a></p>
+<p><h4><a href="http://localhost/Phonebook1/registration.php">Sign Up</a></p>
+<p><h4><a href="http://localhost/Phonebook1/reset_password.php">Reset Password</a></p>
 </left>
 
 <hr>
