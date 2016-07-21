@@ -12,14 +12,3 @@ Echo "Great Job"
 
 ?>
 
-/*function register($v_firstName,$v_middleName,$v_lastName,$v_phoneNumber,$v_email)
-{
-	$insert_query="insert into tables set"; 
-	$insert_query .= "v_firstName = '".$v_firstName."',";
-	$insert_query .= "v_middleName = '".$v_middleName."',";
-	$insert_query .= "v_lastName = '".$v_lastName."',";
-	$insert_query .= "v_phoneNumber = '".$v_phoneNumber."',";
-	$insert_query .= "v_email = '".$v_email."',";
-	$db->query($insert_query);
-
-}*/
