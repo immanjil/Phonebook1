@@ -19,8 +19,6 @@
 echo '<table align="centre" cellspacing="5" cellpadding="10" width="100%">';
 echo "<form action='addcontact_action.php' method='POST'>";
 
-echo "<tr><td><b>First Name</b></td>";
-echo "<td><input type='text' name='v_firstName' value='' maxlength=50></td></tr>";
 
 echo "<tr><td><b>First Name</b></td>";
 echo "<td><input type='text' name='v_firstName' value='' maxlength=50></td></tr>";

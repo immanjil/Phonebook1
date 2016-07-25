@@ -50,6 +50,10 @@ $v_state = $_POST['v_state'];
 $v_state = HTMLSpecialChars($v_state);
 $v_zipcode = $_POST['v_zipcode'];
 $v_zipcode = HTMLSpecialChars($v_zipcode);
+$v_picName = $_POST['pic_name'];
+$v_picName = HTMLSpecialChars($v_picName);
+
+echo $v_picName;
 
 //Validating that all Important Data has been provided by the user
 if(empty($v_userName))
@@ -70,9 +74,9 @@ if(empty($v_phoneNumber))
 }
 
 //User Credentials into database 
-$query = "INSERT INTO user_credentials (v_userName,v_password,v_firstName, v_middleName, v_lastName, v_phoneNumber, v_email, v_resetQuestion, v_resetAnswer, v_address, v_city, v_state, v_zipcode, time_stamp) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,NOW())";
+$query = "INSERT INTO user_credentials (v_userName,v_password,v_firstName, v_middleName, v_lastName, v_phoneNumber, v_email, v_resetQuestion, v_resetAnswer, v_address, v_city, v_state, v_zipcode,v_picName,time_stamp) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW())";
 $stmt = mysqli_prepare($db, $query);
-mysqli_stmt_bind_param($stmt,"sssssssssssss",$v_userName,$v_password,$v_firstName,$v_middleName,$v_lastName,$v_phoneNumber,$v_email, $v_question, $v_answer,$v_address, $v_city, $v_state, $v_zipcode);
+mysqli_stmt_bind_param($stmt,"ssssssssssssss",$v_userName,$v_password,$v_firstName,$v_middleName,$v_lastName,$v_phoneNumber,$v_email, $v_question, $v_answer,$v_address, $v_city, $v_state, $v_zipcode, $v_picName);
 mysqli_stmt_execute($stmt);
 mysqli_stmt_close($stmt);
 mysqli_close($db);

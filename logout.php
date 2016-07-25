@@ -15,7 +15,7 @@ session_unset();
 // destroy the session
 session_destroy(); 
  
-header("Location: http://localhost/Phonebook1/phoneBookApp_home.php");
+header("Location: http://localhost/Phonebook1/index.php");
 
 ?>
 
