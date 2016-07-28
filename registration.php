@@ -55,9 +55,36 @@ $v_state = HTMLSpecialChars($v_state);
 $v_zipcode = $_POST['v_zipcode'];
 $v_zipcode = HTMLSpecialChars($v_zipcode);
 
+//Validating that all Important Data has been provided by the user
+if(empty($v_userName))
+{	$Prompt='User Name Please<br>';}
+if(empty($v_password)){
+	$Prompt='Password Please<br>';}
+if(empty($v_firstName)){
+	$Prompt='First Name<br>';}
+if(empty($v_phoneNumber)){
+	$Prompt='Phone Number<br>';}
+
+//Checking if the Username has already been used
+$query = "SELECT v_userName FROM user_credentials";
+$response = @mysqli_query($db, $query);
+$row = mysqli_fetch_array($response);
+
+while($row = mysqli_fetch_array($response))
+{
+	$check_user=$row['v_userName'];
+	if ($userName = $check_user){
+		$Prompt = "User Name Already Exists!";
+	}
+}
+
+if ($Prompt){
+	echo $Prompt;
+}
+else{
 //For Image
 $target_dir = "uploads/";
-$prefix = .$v_userName."_";$prefix. 
+$prefix = "_".$v_userName."_";
 $target_file = $target_dir .$prefix. basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
 $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
@@ -100,15 +127,6 @@ if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
 
 $v_picName = $prefix.basename( $_FILES["fileToUpload"]["name"]);
 
-//Validating that all Important Data has been provided by the user
-if(empty($v_userName))
-{	$Prompt='User Name Please<br>';}
-if(empty($v_password)){
-	$Prompt='Password Please<br>';}
-if(empty($v_firstName)){
-	$Prompt='First Name<br>';}
-if(empty($v_phoneNumber)){
-	$Prompt='Phone Number<br>';}
 
 //User Credentials into database 
 $query = "INSERT INTO user_credentials (v_userName,v_password,v_firstName, v_middleName, v_lastName, v_phoneNumber, v_email, v_resetQuestion, v_resetAnswer, v_address, v_city, v_state, v_zipcode,v_picName,time_stamp) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW())";
@@ -129,6 +147,7 @@ echo "<p>Copyright 2016 Manjil Thapa Magar </p>";
 echo "</h3>";
 echo "</center>";
 exit();
+}
 }
 ?>
 

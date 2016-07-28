@@ -1,14 +1,14 @@
 <html>
 <head>
-<title> Index </title>
+<title> Admin </title>
 </head>
 <body style="background-color:#E6E6FA">
 
 <!--Heading of application and links to other pages-->
 
 <p style="width: 100%;">
-<div style="float:left"><img src="uploads/PhoneBook.jpg" height="100" width="100"/></div>
-<div align="center"><h2 style="color:blue">Your Personal Phonebook</h2></div>
+<div style="float:left"><img src="uploads/admin.jpg" height="100" width="200"/></div>
+<div align="center"><h2 style="color:blue">Manage Your Application</h2></div>
 <div style="clear:both"/>
 </p> 
 
@@ -35,27 +35,27 @@ $v_userName = $_POST['v_userName'];
 $v_userName = HTMLSpecialChars($v_userName);
 $v_password = $_POST['v_password'];
 
+//Encrypt Password with md5
 $md5_password_check = md5($v_password);
-echo $md5_password_check;
 
 //Get the Contact List from Database
-$query = "SELECT user_id,v_password FROM user_credentials WHERE v_userName='$v_userName'";
+$query = "SELECT admin_id,v_password FROM admin_table WHERE v_userName='$v_userName'";
 $response = @mysqli_query($db, $query);
 $row = mysqli_fetch_array($response);
 
 //Save the datat into new variables
 $password_check = $row['v_password'];
-echo "manjil";
-echo $password_check;
-$user_id = $row['user_id'];
+
+$admin_id = $row['admin_id'];
+
 
 if ($response)
 {
 	if ($md5_password_check == $password_check)
 	{
 		echo "You are logged in";
-		$_SESSION['user_id']=$user_id;
-		$link = "<script>window.open('http://localhost/Phonebook1/phonebook_index.php','_self')</script>";
+		$_SESSION['admin_id']=$admin_id;
+		$link = "<script>window.open('http://localhost/Phonebook1/admin_main.php','_self')</script>";
 		echo $link;
 	}
 	else { 
@@ -73,7 +73,7 @@ else {
 
 //Form to get the user input of First, Middle, Last Names, Phone Number and Email
 echo '<table align="center" cellspacing="5" cellpadding="10" >';
-echo "<form action='index.php' method='POST'>";
+echo "<form action='admin.php' method='POST'>";
 
 echo "<tr><td><b>User Name</b></td>";
 echo "<td> <input type='text' name='v_userName' value='' maxlength=25></td></tr>";
