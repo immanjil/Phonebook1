@@ -2,7 +2,7 @@
 <head>
 <title> Phone Book Index </title>
 </head>
-<body>
+<body style="background-color:#E6E6FA">
 
 <!--Heading of application and links to other pages-->
 <center>

@@ -2,7 +2,7 @@
 <head>
 <title> Activities Page </title>
 </head>
-<body>
+<body style="background-color:#E6E6FA">
 
 <!--Heading of application and links to other pages-->
 <center>
@@ -43,8 +43,8 @@ echo "<center><h2>Welcome to your Contact List $user</h2></center>";
 $picName = $row['v_picName'];
 $target_dir = "uploads/";
 $target_file = $target_dir . $picName;
-echo '<center><img src="'.$target_file.'" alt="Profile Picture" height="200" width="200"></center>';
-
+echo '<left><img src="'.$target_file.'" alt="Profile Picture" height="100" width="100"></Left><br>';
+echo "User : $user";
 
 if ($table)
 {
@@ -77,7 +77,7 @@ while($row = mysqli_fetch_array($response))
                 }
                
                 echo "          <td align='left'>".$row['contact_id']."</td>
-                                <td align='left'><a href='details.php?id=".$row['contact_id']."'>".$row['v_firstName']."</a></td>
+                                <td align='left'><a href='contact_details.php?id=".$row['contact_id']."'>".$row['v_firstName']."</a></td>
                                 <td align='left'>".$row['v_phoneNumber']."</td>
                                 <td align='left'>".$row['time_stamp']."</td>
                                 ";
@@ -87,7 +87,7 @@ while($row = mysqli_fetch_array($response))
 }
 
 echo '</table>';
-echo "<center><h2><a href='http://localhost/Phonebook1/interaction.php'>Go to Full contact Detail</a></h2></center>";
+echo "<left><h4><a href='http://localhost/Phonebook1/interaction.php'>Check out Complete Contact List</a></h2></center>";
 }
 else{
 	echo"No DATABASE";

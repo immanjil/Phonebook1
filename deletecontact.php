@@ -2,7 +2,7 @@
 <head>
 <title> Delete Contact </title>
 </head>
-<body>
+<body style="background-color:#E6E6FA">
 
 <!--Heading of application and links to other pages-->
 <center>
@@ -12,6 +12,52 @@
 	</div>
 </center>
 <hr>
+<?php
+//Check if Form has been Submittedif
+if(isset($_POST["DeleteAction"])){
+// Start the session
+session_start();
+
+//Connecting code to Database
+$DB_USER ='root';
+$DB_PASSWORD = '';
+$DB_HOST = 'localhost';
+$DB_NAME ='site';
+$db= new mysqli($DB_HOST,$DB_USER, $DB_PASSWORD, $DB_NAME)
+or die("Could not connect to MySQL");
+
+//Receive & Validating the Data Provided by the User
+$delete1 = $_POST['delete1'];
+$delete1= HTMLSpecialChars($delete1);
+
+// Echo session variables that were set on previous page
+$id = $_SESSION["user_id"] ;
+$table = 'contacts';
+
+//Delete the Contact chosen by User
+$query = "DELETE FROM $table WHERE contact_id='$delete1' and user_id='$id'";
+$stmt = mysqli_prepare($db,$query);
+mysqli_stmt_execute($stmt);
+mysqli_stmt_close($stmt);
+
+//Check if the Contact was Deleted
+if (mysqli_query($db, $query)) {
+    echo "<colspan=2 class='main-text'><b>Record deleted successfully";
+	echo '<h3><a href="http://localhost/Phonebook1/phonebook_index.php">Take me to Contact List</a></p>';
+	echo "<hr>";
+	echo "<center>";
+	echo '<h3><a href="http://localhost/Phonebook1/logout.php">Logout</a></p>';
+	echo '<h3><a href="http://localhost/Phonebook1/phonebook_index.php">Go Back to Home</a></p>';
+	echo "<p>Copyright 2016 Manjil Thapa Magar </p>";
+	echo "</h3>";
+	echo "</center>";
+	exit();
+} else {
+    echo "Error deleting record: " . mysqli_error($db);
+} 
+mysqli_close($db);
+}
+?>
 
 <?php
 
@@ -36,7 +82,7 @@ $response = @mysqli_query($db, $query);
 
 //Form to get the user input of First, Middle, Last Names, Phone Number and Email
 echo '<table align="centre" cellspacing="5" cellpadding="10" >';
-echo "<form action='deletecontact_action.php' method='post'>";
+echo "<form action='deletecontact.php' method='post'>";
 echo "<tr>";
 
 //Show checkbox for all the Contacts as option to delete
@@ -66,7 +112,7 @@ else{
 mysqli_close($db);
 
 //Submit the chosen contacts to be deleted
-echo "<td> <align='center'> <input type='submit' value='Submit'>";
+echo "<td> <align='center'> <input type='submit' name='DeleteAction' value='Submit'>";
 
 echo "</form>";
 echo "</table>";

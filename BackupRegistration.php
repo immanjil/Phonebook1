@@ -13,6 +13,15 @@
 <hr>
 
 <?php
+
+/* <!--Form to Upload the Profile Picture-->
+<form action="registration.php" method="post" enctype="multipart/form-data">
+    Choose your Profile Picture:
+    <input type="file" name="fileToUpload" id="fileToUpload">
+    <input type="submit" value="Upload Image" name="UploadImage">
+</form>
+ */
+ 
 //Check if the Form has been Submitted
 if(isset($_POST["Register"])){ 
 
@@ -54,51 +63,54 @@ $v_state = $_POST['v_state'];
 $v_state = HTMLSpecialChars($v_state);
 $v_zipcode = $_POST['v_zipcode'];
 $v_zipcode = HTMLSpecialChars($v_zipcode);
+$v_picName = $_POST['pic_name'];
+$v_picName = HTMLSpecialChars($v_picName);
 
 //For Image
 $target_dir = "uploads/";
-$prefix = .$v_userName."_";$prefix. 
-$target_file = $target_dir .$prefix. basename($_FILES["fileToUpload"]["name"]);
-$uploadOk = 1;
-$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-// Check if image file is a actual image or fake image
-$check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-if($check !== false) {
+//$prefix = "_".$user_id."_";$prefix. 
+$target_file = $target_dir .basename($_FILES["fileToUpload"]["name"]);
+
+	
 	$uploadOk = 1;
-} else {
-	echo "File is not an image.";
-	$uploadOk = 0;
-}
-
-// Check if file already exists
-if (file_exists($target_file)) {
-	echo "Sorry, file already exists.";
-	$uploadOk = 0;
-}
-// Check file size
-if ($_FILES["fileToUpload"]["size"] > 500000) {
-	echo "Sorry, your file is too large.";
-	$uploadOk = 0;
-}
-// Allow certain file formats
-if($imageFileType != "JPG" && $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-	&& $imageFileType != "gif" ) {
-	echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-	$uploadOk = 0;
-}
-// Check if $uploadOk is set to 0 by an error
-if ($uploadOk == 0) {
-	echo "Sorry, your file was not uploaded.";
-// if everything is ok, try to upload file
-} else {
-if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-	echo "The file ".$prefix.basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+	$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+	// Check if image file is a actual image or fake image
+	$check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+	if($check !== false) {
+	echo "File is an image - " . $check["mime"] . ".";
+	$uploadOk = 1;
 	} else {
-	echo "Sorry, there was an error uploading your file.";
+	echo "File is not an image.";
+	$uploadOk = 0;}
+	
+	// Check if file already exists
+	if (file_exists($target_file)) {
+		echo "Sorry, file already exists.";
+		$uploadOk = 0;
 	}
-}
-
-$v_picName = $prefix.basename( $_FILES["fileToUpload"]["name"]);
+	// Check file size
+	if ($_FILES["fileToUpload"]["size"] > 500000) {
+		echo "Sorry, your file is too large.";
+		$uploadOk = 0;
+	}
+	// Allow certain file formats
+	if($imageFileType != "JPG" && $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+	&& $imageFileType != "gif" ) {
+		echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+		$uploadOk = 0;
+	}
+	// Check if $uploadOk is set to 0 by an error
+	if ($uploadOk == 0) {
+		echo "Sorry, your file was not uploaded.";
+	// if everything is ok, try to upload file
+	} else {
+		if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+			echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+		} else {
+			echo "Sorry, there was an error uploading your file.";
+		}
+	}
+$pic_name = basename( $_FILES["fileToUpload"]["name"]);
 
 //Validating that all Important Data has been provided by the user
 if(empty($v_userName))
@@ -120,6 +132,7 @@ mysqli_stmt_close($stmt);
 mysqli_close($db);
 
 echo "Registration successful";
+
 echo '<h3><a href="http://localhost/Phonebook1/index.php">Take me to Login</a></p>';
 echo "<hr>";
 echo "<center>";
@@ -177,7 +190,11 @@ echo "<tr><td><b>State</b></td>";
 echo "<td><input type='text' name='v_state' value='' maxlength=50></td></tr>";
 echo "<tr><td><b>Zip Code</b></td>";
 echo "<td><input type='text' name='v_zipcode' value='' maxlength=50></td></tr>";
-
+if (isset($pic_name)) {
+	echo "<tr><td><input type='hidden' name='pic_name' value='$pic_name'</td></tr>";
+}else{
+	echo "<tr><td><input type='hidden' name='pic_name' value='noPic'</td></tr>";
+}
 echo "<td> <align='center'> <input type='submit' name='Register' value='Submit'>";
 echo "<input type='reset' name='reset' value='Clear'></td></tr>";
 echo "</form>";
