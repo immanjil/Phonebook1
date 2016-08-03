@@ -51,13 +51,61 @@ $update = $_POST['u_contact_id'];
 $update = HTMLSpecialChars($update);
 
 //Validating that all Important Data has been provided by the user
-if(empty($v_firstName))
-{
-	$Prompt='First Name<br>';
+
+if(empty($v_firstName)){
+	$Prompt='First Name<br>';}
+if(empty($v_phoneNumber)){
+	$Prompt='Phone Number<br>';}
+
+if ($Prompt){
+	echo $Prompt;
 }
-if(empty($v_phoneNumber))
-{
-	$Prompt='Phone Number<br>';
+else{
+//For Image
+$target_dir = "uploads/";
+$prefix = "_".$v_firstName."_";
+$target_file = $target_dir .$prefix.basename($_FILES["fileToUpload"]["name"]);
+$uploadOk = 1;
+$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+// Check if image file is a actual image or fake image
+$check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+if($check !== false) {
+	$uploadOk = 1;
+} else {
+	echo "File is not an image.";
+	$uploadOk = 0;
+}
+
+// Check if file already exists
+if (file_exists($target_file)) {
+	echo "Sorry, file already exists.";
+	$uploadOk = 0;
+}
+// Check file size
+if ($_FILES["fileToUpload"]["size"] > 500000) {
+	echo "Sorry, your file is too large.";
+	$uploadOk = 0;
+}
+// Allow certain file formats
+if($imageFileType != "JPG" && $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+	&& $imageFileType != "gif" ) {
+	echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+	$uploadOk = 0;
+}
+// Check if $uploadOk is set to 0 by an error
+if ($uploadOk == 0) {
+	echo "Sorry, your file was not uploaded.";
+// if everything is ok, try to upload file
+} else {
+if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+	echo "The file ".$prefix.basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+	} else {
+	echo "Sorry, there was an error uploading your file.";
+	}
+}
+
+$v_picName = $prefix.basename( $_FILES["fileToUpload"]["name"]);
+
 }
 
 // Echo session variables that were set on previous page
@@ -65,7 +113,7 @@ $id = $_SESSION["user_id"] ;
 $table = 'contacts';
 
 //data into database
-$sql = "UPDATE $table SET v_firstName = '$v_firstName', v_middleName = '$v_middleName', v_lastName = '$v_lastName',v_phoneNumber = '$v_phoneNumber', v_email = '$v_email', v_address = '$v_address', v_city = '$v_city', v_state = '$v_state',v_zipcode = '$v_zipcode' WHERE contact_id='$update' and user_id='$id'";
+$sql = "UPDATE $table SET v_firstName = '$v_firstName', v_middleName = '$v_middleName', v_lastName = '$v_lastName',v_phoneNumber = '$v_phoneNumber', v_email = '$v_email', v_address = '$v_address', v_city = '$v_city', v_state = '$v_state',v_zipcode = '$v_zipcode', v_picName='$v_picName' WHERE contact_id='$update' and user_id='$id'";
 
 if (mysqli_query($db, $sql)) {
     echo "Record updated successfully";
@@ -109,7 +157,7 @@ $id = $_SESSION["user_id"] ;
 $table = 'contacts';
 
 //List the Contacts available on the Database
-$query = "SELECT v_firstName, v_middleName, v_lastName, v_phoneNumber, v_email, v_address, v_city, v_state, v_zipcode FROM $table WHERE contact_id='$delete1' and user_id=$id";
+$query = "SELECT v_firstName, v_middleName, v_lastName, v_phoneNumber, v_email, v_address, v_city, v_state, v_zipcode, v_picName FROM $table WHERE contact_id='$delete1' and user_id=$id";
 $response = @mysqli_query($db, $query);
 $row = mysqli_fetch_array($response);
 //Save the datat into new variables
@@ -125,11 +173,12 @@ $u_zipcode = $row['v_zipcode'];
 
 //Form to get the user input of First, Middle, Last Names, Phone Number and Email
 echo '<table align="centre" cellspacing="5" cellpadding="10" width="100%">';
-echo "<form action='updatecontact.php' method='POST'>";
+echo "<form action='updatecontact.php' method='POST' enctype='multipart/form-data'>";
 
+echo "Choose your Profile Picture:";
+echo "<input type='file' name='fileToUpload' id='fileToUpload'>";
 echo "<tr><td><b>First Name</b></td>";
 echo "<td><input type='text' name='u_firstName' value='$u_firstName' maxlength=50></td></tr>";
-
 echo "<tr><td><b>Middle Name</b></td>";
 echo "<td><input type='text' name='u_middleName' value='$u_middleName' maxlength=50></td></tr>";
 echo "<tr><td><b>Last Name</b></td>";

@@ -52,9 +52,11 @@ $response = @mysqli_query($db, $query);
 $row = mysqli_fetch_array($response);
 
 //$picName = $row['v_picName'];
-$picName = "panda.JPG";
+$picName = $row['v_picName'];
+
 $target_dir = "uploads/";
-$target_file = $target_dir . $picName;
+$prefix =$picName;
+$target_file = $target_dir .$picName;
 echo '<center><img src="'.$target_file.'" alt="Profile Picture" height="100" width="100"></center><br>';
 
 //Contact Detail of the User Desired contactt

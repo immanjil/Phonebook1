@@ -5,10 +5,11 @@
 <body style="background-color:#E6E6FA">
 
 <!--Heading of application and links to other pages-->
-<center>
-    <h2 class="c1">Admin Registration</h3>
-	</div>
-	</center>
+<p style="width: 100%;">
+<div style="float:left"><img src="uploads/admin.jpg" height="100" width="200"/></div>
+<div align="center"><h2 style="color:blue">Add New Admin</h2></div>
+<div style="clear:both"/>
+</p> 
 <hr>
 
 <?php
@@ -87,7 +88,7 @@ echo "<tr><td><b>User Name</b></td>";
 echo "<td><input type='text' name='v_userName' value='' maxlength=50></td></tr>";
 echo "<tr><td><b>Password</b></td>";
 echo "<td><input type='password' name='v_password' value='' maxlength=50></td></tr>";
-echo "<td> <align='center'> <input type='submit' name='Register' value='Submit'>";
+echo "<td> <align='center'> <input type='submit' name='Register' value='Add New Admin'>";
 echo "</form>";
 echo "</table>";
 
@@ -96,7 +97,8 @@ echo "</table>";
 <hr>
 <!--Footer-->
 <center>
-<p><h3><a href="http://localhost/Phonebook1/index.php">Login</a></p>
+<p><h3><a href="http://localhost/Phonebook1/admin_main.php">Take me to User List</a></p>
+<p><h3><a href="http://localhost/Phonebook1/admin.php">Admin Login</a></p>
 <p>Copyright 2016 Manjil Thapa Magar </p>
 </h3>
 </center>

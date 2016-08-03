@@ -79,7 +79,7 @@ echo "<tr><td><b>User Name</b></td>";
 echo "<td> <input type='text' name='v_userName' value='' maxlength=25></td></tr>";
 
 echo "<tr><td><b>Password</b></td>";
-echo "<td><input type='password' name='v_password' value='' maxlength=25></td></tr>";
+echo "<td><input type='password' name='v_password' value='' maxlength=1000></td></tr>";
 
 echo "<td> <align='center'> <input type='submit' name='Login' value='Login'>";
 echo "<input type='reset' name='reset' value='Clear'></td></tr>";

@@ -7,12 +7,10 @@
 <!--Heading of application and links to other pages-->
 
 <p style="width: 100%;">
-<div style="float:left"><img src="uploads/admin.jpg" height="100" width="200"/></div>
+<div style="float:left"><img src="uploads/admin_login.jpg" height="100" width="200"/></div>
 <div align="center"><h2 style="color:blue">Manage Your Application</h2></div>
 <div style="clear:both"/>
 </p> 
-
-
 <hr>
 
 <?php 
@@ -88,16 +86,11 @@ echo "</form>";
 echo "</table>";
 
 ?>
-<center>
-<p><h4><a href="http://localhost/Phonebook1/registration.php">Sign Up</a></h4>
-<h5><a href="http://localhost/Phonebook1/reset_password.php">Forgot Your Password?</a><h5></p>
-</center>
-
 <hr>
 <!--Footer-->
 <center>
 <p><h4>Copyright 2016 Manjil Thapa Magar</h4></p>
-<p><h5><a href="http://localhost/Phonebook1/admin.php">admin</a></p>
+<p><h5><a href="http://localhost/Phonebook1/index.php">Back to User Login</a></p>
 </center>
 
 </body>
